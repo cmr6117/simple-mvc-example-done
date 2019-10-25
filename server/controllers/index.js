@@ -3,6 +3,7 @@ const models = require('../models');
 
 // get the Cat model
 const Cat = models.Cat.CatModel;
+const Dog = models.Dog.DogModel;
 
 // default fake data so that we have something to work with until we make a real Cat
 const defaultData = {
@@ -255,6 +256,11 @@ const notFound = (req, res) => {
 
 
 
+
+const readAllDogs = (req, res, callback) => {
+  Dog.find(callback);
+};
+
 const hostPage4 = (req, res) => {
   // function to call when we get objects back from the database.
   // With Mongoose's find functions, you will get an err and doc(s) back
@@ -268,11 +274,6 @@ const hostPage4 = (req, res) => {
   };
 
   readAllDogs(req, res, callback);
-};
-
-
-const readAllDogs = (req, res, callback) => {
-  Dog.find(callback);
 };
 
 
@@ -298,6 +299,7 @@ module.exports = {
   page1: hostPage1,
   page2: hostPage2,
   page3: hostPage3,
+  page4: hostPage4,
   readCat,
   getName,
   setName,
