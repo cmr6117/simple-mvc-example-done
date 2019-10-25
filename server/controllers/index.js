@@ -257,6 +257,20 @@ const notFound = (req, res) => {
 
 
 
+const readDog = (req, res) => {
+  const name1 = req.query.name;
+
+  const callback = (err, doc) => {
+    if (err) {
+      return res.json({ err }); // if error, return it
+    }
+
+    return res.json(doc);
+  };
+
+  Dog.findByName(name1, callback);
+};
+
 const readAllDogs = (req, res, callback) => {
   Dog.find(callback);
 };
@@ -274,7 +288,7 @@ const hostPage4 = (req, res) => {
 };
 
 
-const setName = (req, res) => {
+const setDogName = (req, res) => {
   if (!req.body.name || !req.body.breed || !req.body.age) {
     return res.status(400).json({ error: 'name, breed, and age are all required' });
   }
@@ -301,6 +315,24 @@ const setName = (req, res) => {
   return res;
 };
 
+const searchDogName = (req, res) => {
+  if (!req.query.name) {
+    return res.json({ error: 'Name is required to perform a search' });
+  }
+
+  return Dog.findByName(req.query.name, (err, doc) => {
+    if (err) {
+      return res.json({ err }); // if error, return it
+    }
+
+    if (!doc) {
+      return res.json({ error: 'No dogs found' });
+    }
+
+    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
+  });
+};
+
 
 
 
@@ -325,9 +357,12 @@ module.exports = {
   page3: hostPage3,
   page4: hostPage4,
   readCat,
+  readDog,
   getName,
   setName,
+  setDogName,
   updateLast,
   searchName,
+  searchDogName,
   notFound,
 };
