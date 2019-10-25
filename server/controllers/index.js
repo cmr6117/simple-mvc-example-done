@@ -3,7 +3,6 @@ const models = require('../models');
 
 // get the Cat model
 const Cat = models.Cat.CatModel;
-const Dog = models.Dog.DogModel;
 
 // default fake data so that we have something to work with until we make a real Cat
 const defaultData = {
@@ -248,53 +247,6 @@ const notFound = (req, res) => {
   });
 };
 
-
-
-
-
-
-
-const setDogName = (req, res) => {
-  // check if the required fields exist
-  // normally you would also perform validation
-  // to know if the data they sent you was real
-  if (!req.body.name || !req.body.breed || !req.body.age) {
-    // if not respond with a 400 error
-    // (either through json or a web page depending on the client dev)
-    return res.status(400).json({ error: 'name, breed and age are all required' });
-  }
-
-  // dummy JSON to insert into database
-  const dogData = {
-    name: req.body.name,
-    breed: req.body.breed,
-    age: req.body.age,
-  };
-
-  // create a new object of CatModel with the object to save
-  const newDog = new Dog(dogData);
-
-  // create new save promise for the database
-  const savePromise = newDog.save();
-
-  savePromise.then(() => {
-    res.json(newDog);
-  });
-
-  // if error, return it
-  savePromise.catch((err) => res.json({ err }));
-
-  return res;
-};
-
-
-
-
-
-
-
-
-
 // export the relevant public controller functions
 module.exports = {
   index: hostIndex,
@@ -306,6 +258,5 @@ module.exports = {
   setName,
   updateLast,
   searchName,
-  setDogName,
   notFound,
 };
