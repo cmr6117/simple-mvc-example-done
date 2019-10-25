@@ -287,7 +287,15 @@ const setDogName = (req, res) => {
   return res;
 };
 
-
+const hostPage4 = (req, res) => {
+  // res.render takes a name of a page to render.
+  // These must be in the folder you specified as views in your main app.js file
+  // Additionally, you don't need .jade because you registered
+  // the file type in the app.js as jade. Calling res.render('index')
+  // actually calls index.jade. A second parameter of JSON can be
+  // passed into the jade to be used as variables with #{varName}
+  res.render('page4');
+};
 
 
 
@@ -301,6 +309,7 @@ module.exports = {
   page1: hostPage1,
   page2: hostPage2,
   page3: hostPage3,
+  page4: hostPage4,
   readCat,
   getName,
   setName,
