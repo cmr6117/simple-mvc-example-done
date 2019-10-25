@@ -247,6 +247,51 @@ const notFound = (req, res) => {
   });
 };
 
+
+
+
+
+
+
+
+
+const hostPage4 = (req, res) => {
+  // function to call when we get objects back from the database.
+  // With Mongoose's find functions, you will get an err and doc(s) back
+  const callback = (err, docs) => {
+    if (err) {
+      return res.json({ err }); // if error, return it
+    }
+
+    // return success
+    return res.render('page4', { dogs: docs });
+  };
+
+  readAllDogs(req, res, callback);
+};
+
+
+const readAllDogs = (req, res, callback) => {
+  Dog.find(callback);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // export the relevant public controller functions
 module.exports = {
   index: hostIndex,
