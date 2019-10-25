@@ -330,13 +330,9 @@ const searchDogName = (req, res) => {
     }
     
     doc.age++;
+    doc.save();
       
-    const savePromise = doc.save();
-
-    savePromise.then(() => return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
-
-    savePromise.catch((err) => res.json({ err }));
-
+    return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
   });
 };
 
