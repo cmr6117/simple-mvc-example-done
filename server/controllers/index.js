@@ -262,20 +262,44 @@ const readAllDogs = (req, res, callback) => {
 };
 
 const hostPage4 = (req, res) => {
-  // function to call when we get objects back from the database.
-  // With Mongoose's find functions, you will get an err and doc(s) back
   const callback = (err, docs) => {
     if (err) {
       return res.json({ err }); // if error, return it
     }
 
-    // return success
     return res.render('page4', { dogs: docs });
   };
 
   readAllDogs(req, res, callback);
 };
 
+
+const setName = (req, res) => {
+  if (!req.body.name || !req.body.breed || !req.body.age) {
+    return res.status(400).json({ error: 'name, breed, and age are all required' });
+  }
+
+  const catData = {
+    name: req.body.name,
+    breed: req.body.breed,
+    age: req.body.age,
+  };
+
+  // create a new object of CatModel with the object to save
+  const newDog = new Dog(dogData);
+
+  // create new save promise for the database
+  const savePromise = newDog.save();
+
+  savePromise.then(() => {
+    res.json(newDog);
+  });
+
+  // if error, return it
+  savePromise.catch((err) => res.json({ err }));
+
+  return res;
+};
 
 
 
