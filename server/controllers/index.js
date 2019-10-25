@@ -293,7 +293,7 @@ const setDogName = (req, res) => {
     return res.status(400).json({ error: 'name, breed, and age are all required' });
   }
 
-  const catData = {
+  const dogData = {
     name: req.body.name,
     breed: req.body.breed,
     age: req.body.age,
@@ -329,7 +329,6 @@ const searchDogName = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
     
-    doc.age++;
     doc.save();
       
     return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
