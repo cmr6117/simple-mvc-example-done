@@ -337,6 +337,7 @@ const searchForAndUpdateDog = (req, res) => {
     const thisDog = searchDogName(req, res);
     thisDog.age++;
     thisDog.save();
+    return thisDog;
 };
 
 
@@ -368,5 +369,6 @@ module.exports = {
   updateLast,
   searchName,
   searchDogName,
+    searchForAndUpdateDog,
   notFound,
 };
