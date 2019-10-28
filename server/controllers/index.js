@@ -329,6 +329,7 @@ const searchDogName = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
     
+    doc.age++;
     doc.save();
       
     return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
