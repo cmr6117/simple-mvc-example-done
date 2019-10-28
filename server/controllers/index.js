@@ -320,7 +320,7 @@ const searchDogName = (req, res) => {
     return res.json({ error: 'Name is required to perform a search' });
   }
 
-  return Dog.findByName(req.query.name, (err, doc) => {
+  const dogToUpdate = Dog.findByName(req.query.name, (err, doc) => {
     if (err) {
       return res.json({ err }); // if error, return it
     }
@@ -329,11 +329,12 @@ const searchDogName = (req, res) => {
       return res.json({ error: 'No dogs found' });
     }
     
-    doc.age++;
-    doc.save();
-      
     return res.json({ name: doc.name, breed: doc.breed, age: doc.age });
   });
+    
+  dogToUpdate.age++;
+  dogToUpdate.save();
+  return dogToUpdate;
 };
 
 
